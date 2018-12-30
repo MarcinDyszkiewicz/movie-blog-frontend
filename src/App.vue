@@ -2,14 +2,18 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
+
+    <layout></layout>
   </div>
 </template>
 
 <script>
     import '@/assets/styles/main.css';
+    import Layout from './components/Layout';
 
     export default {
-        name: 'app'
+        name: 'app',
+        components: { Layout }
     }
 </script>
 
