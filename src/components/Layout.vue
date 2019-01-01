@@ -1,5 +1,18 @@
-<!--<template>-->
-    <!--<div>-->
+<template>
+    <div>
+        <top-nav/>
+
+        <div class="container mx-auto max-w-2xl">
+
+            <!--//Logo-->
+            <main-logo/>
+
+            <!--Menu-->
+            <main-menu/>
+
+        </div>
+
+
         <!--<div>-->
             <!--<router-link to="/">Home</router-link>-->
             <!--<router-link to="/about">About</router-link>-->
@@ -17,10 +30,14 @@
         <!--<div style="margin-top: 2rem">-->
             <!--<router-view></router-view>-->
         <!--</div>-->
-    <!--</div>-->
-<!--</template>-->
+    </div>
+</template>
 <script>
+    import TopNav from "./TopNav";
+    import MainLogo from "./Layout/MainLogo";
+    import MainMenu from "./Layout/MainMenu";
     export default {
+        components: {MainMenu, MainLogo, TopNav},
         data() {
             return {
                 authenticated: auth.check(),

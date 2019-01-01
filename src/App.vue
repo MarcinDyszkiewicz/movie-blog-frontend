@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <router-view/>
-
     <layout></layout>
+
+    <div class="container mx-auto max-w-2xl">
+      <router-view/>
+    </div>
+
   </div>
 </template>
 

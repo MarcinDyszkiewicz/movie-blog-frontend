@@ -2,7 +2,7 @@
     <div>
         <div class="relative">
             <el-carousel :interval="5000" arrow="always" trigger="click">
-                <el-carousel-item v-for="post in posts" :key="post">
+                <el-carousel-item v-for="post in posts" :key="post.id">
 
                     <!--<h3>{{ post }}</h3>-->
                     <!--<div class="max-w-sm rounded overflow-hidden shadow-lg" >-->
