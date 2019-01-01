@@ -10,7 +10,7 @@
                     <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
                 </button>
             </div>
-            <div class="max-w-xl block flex-grow lg:flex lg:items-center lg:w-auto lg:mr-auto lg:ml-auto">
+            <div class="max-w-2xl block flex-grow lg:flex lg:items-center lg:w-auto lg:mr-auto lg:ml-auto">
                 <div class="text-sm lg:flex-none">
                     <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4 lg:ml-auto">
                         Docs
@@ -32,7 +32,7 @@
             </div>
         </nav>
 
-        <div class="container mx-auto max-w-xl">
+        <div class="container mx-auto max-w-2xl">
 
         <!--//Logo-->
 
@@ -77,15 +77,38 @@
 
             <!--Hot Posts-->
 
-            <div>
+            <div class="mb-2">
                 <hot-posts/>
             </div>
 
-            <!--Popular Posts-->
+            <!--Main Block-->
 
-            <div>
-                <popular-posts/>
+            <div class="flex">
+                <div id="main-block" class="w-3/4">
+
+                <!--Popular Posts-->
+                    <div class="m-2 text-left">
+                        <h2 class="">Popular Posts</h2>
+                    </div>
+                        <popular-posts/>
+
+                <!--Recent Post-->
+                    <div class="m-2 text-left">
+                        <h2 class="">Recent Posts</h2>
+                    </div>
+
+
+
+                </div>
+                <!--Right Aside-->
+
+                <div class="right-aside w-1/4">
+
+                </div>
+
+
             </div>
+
 
 
         </div>
