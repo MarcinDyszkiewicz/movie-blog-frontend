@@ -36,10 +36,10 @@
                            <el-input v-model="ruleForm.title"/>
                        </el-form-item>
                        <el-form-item label="Year" prop="year">
-                           <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.year" style="width: 100%;"/>
+                           <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.year" style="width: 20%;"/>
                        </el-form-item>
                        <el-form-item label="Released" prop="released">
-                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.released" style="width: 100%;"/>
+                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.released" style="width: 20%;"/>
                        </el-form-item>
                        <el-form-item label="Activity zone" prop="region">
                            <el-select v-model="ruleForm.region" placeholder="Activity zone">
