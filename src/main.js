@@ -73,12 +73,18 @@ import VueAxios from 'vue-axios';
       Notification
   } from 'element-ui';
 
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+
 import App from './App';
 import router from './router';
 import auth from './auth';
 
 Vue.use(VueAxios, axios);
 Vue.use(router);
+
+// configure language
+locale.use(lang);
 
   Vue.use(Pagination);
   Vue.use(Dialog);

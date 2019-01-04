@@ -18,7 +18,9 @@
             </div>
 
             <div>
-                <similar-posts v-if="post.id !== null" :post-id="post.id" />
+                <similar-posts />
+                    <!--v-if="post.id !== null" -->
+                    <!--:post-id="post.id"/>-->
             </div>
         </div>
     </div>
@@ -35,12 +37,14 @@
             return {
                 post: {
                     id: null,
-                    title: "",
+                    title: "title",
                     image: "",
-                    summary: "",
+                    body: "body body body",
+                    summary: "summary",
                     slug: "",
                     userId: null,
-                    userName: ""
+                    userName: "imie autora",
+                    published_at: "5 sty 2019"
                 },
                 endpointPrefix: 'http://porady-prawnicze.test:8080/api'
             };
