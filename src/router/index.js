@@ -25,11 +25,11 @@ export default new Router({
       component: SinglePost,
     },
       //@@todo mocked data
-    {
-        path: '/post/1',
-        name: 'SinglePost',
-        component: SinglePost,
-    },
+    // {
+    //     path: '/post/1',
+    //     name: 'SinglePost',
+    //     component: SinglePost,
+    // },
     {
       path: '/panel/movie/create',
       name: 'MovieCreate',

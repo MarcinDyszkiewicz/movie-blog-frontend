@@ -33,13 +33,13 @@
                <div>
                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                        <el-form-item label="Title" prop="title">
-                           <el-input v-model="ruleForm.title"/>
+                           <el-input v-model="ruleForm.title" class="w-4/5 float-left"/>
                        </el-form-item>
                        <el-form-item label="Year" prop="year">
-                           <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.year" style="width: 20%;"/>
+                           <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.year" class="float-left" style="width: 30%;"/>
                        </el-form-item>
                        <el-form-item label="Released" prop="released">
-                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.released" style="width: 20%;"/>
+                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.released" class="float-left" style="width: 30%;"/>
                        </el-form-item>
                        <el-form-item label="Activity zone" prop="region">
                            <el-select v-model="ruleForm.region" placeholder="Activity zone">
@@ -86,6 +86,10 @@
                        </el-form-item>
                    </el-form>
                </div>
+
+                <movie-create-search-movie/>
+
+
             </div>
 
         </div>
@@ -97,9 +101,12 @@
 
 <script>
     import LeftNavigation from "./LeftNavigation";
+    import MovieCreateSearchMovie from "./MovieCreateSearchMovie";
 
     export default {
-        components: {LeftNavigation},
+        components: {
+            MovieCreateSearchMovie,
+            LeftNavigation},
         name: "movie-create",
         data() {
             return {
@@ -154,7 +161,6 @@
                 this.$refs[formName].resetFields();
             }
         }
-
     }
 </script>
 
