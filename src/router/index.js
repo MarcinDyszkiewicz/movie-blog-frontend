@@ -4,6 +4,7 @@ import Home from '@/components/Home';
 import Login from '@/components/Login';
 import SinglePost from '@/components/post/SinglePost';
 import MovieCreate from '@/components/panel/MovieCreate';
+import MovieCreateForm from '@/components/panel/MovieCreateForm';
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/panel/movie/create',
       name: 'MovieCreate',
       component: MovieCreate,
+    },
+    {
+      path: '/panel/movie/create/form',
+      name: 'MovieCreateForm',
+      component: MovieCreateForm,
     },
   ],
 });
