@@ -2,12 +2,11 @@
   <div id="app" class="min-h-screen flex flex-col">
     <layout></layout>
 
-    <div class="container mx-auto max-w-2xl flex-grow">
-      <panel v-if="layout">
-        <router-view/>
-      </panel>
+    <div class="container w-full mx-auto max-w-2xl flex-grow">
+      <panel v-if="layout"/>
+      <!--<router-view/>-->
     </div>
-
+<!--podzielić na dwa layouty i w srodku nich wbic router view-->
     <footer-main/>
 
   </div>

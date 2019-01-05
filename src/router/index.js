@@ -46,6 +46,7 @@ export default new Router({
       path: '/panel/movie/create/form',
       name: 'MovieCreateForm',
       meta: { panel: true },
+      props: true,
       component: MovieCreateForm,
     },
   ],

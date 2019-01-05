@@ -32,14 +32,14 @@
 
                <div>
                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                       <el-form-item label="Title" prop="title">
-                           <el-input v-model="ruleForm.title" class="w-4/5 float-left"/>
+                       <el-form-item label="Title" prop="Title">
+                           <el-input v-model="ruleForm.Title" class="w-4/5 float-left"/>
                        </el-form-item>
-                       <el-form-item label="Year" prop="year">
-                           <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.year" class="float-left" style="width: 30%;"/>
+                       <el-form-item label="Year" prop="Year">
+                           <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.Year" class="float-left" style="width: 30%;"/>
                        </el-form-item>
-                       <el-form-item label="Released" prop="released">
-                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.released" class="float-left" style="width: 30%;"/>
+                       <el-form-item label="Released" prop="Released">
+                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.Released" class="float-left" style="width: 30%;"/>
                        </el-form-item>
                        <el-form-item label="Activity zone" prop="region">
                            <el-select v-model="ruleForm.region" placeholder="Activity zone">
@@ -108,13 +108,14 @@
             MovieCreateSearchMovie,
             LeftNavigation},
         name: "movie-create-form",
+        props: ["movie"],
         data() {
             return {
                 ruleForm: {
-                    title: '',
-                    year: '',
+                    Title: '',
+                    Year: '',
                     region: '',
-                    released: '',
+                    Released: '',
                     delivery: false,
                     type: [],
                     resource: '',
@@ -160,6 +161,10 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             }
+        },
+        mounted() {
+            console.log(this.movie);
+            this.ruleForm = this.movie;
         }
     }
 </script>
