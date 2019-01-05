@@ -80,7 +80,11 @@ import App from './App';
 import router from './router';
 import auth from './auth';
 
-Vue.use(VueAxios, axios);
+const axiosDev = axios.create({
+   baseURL: ""
+});
+
+Vue.use(VueAxios, axiosDev);
 Vue.use(router);
 
 // configure language

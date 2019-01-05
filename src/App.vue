@@ -3,10 +3,12 @@
     <layout></layout>
 
     <div class="container mx-auto max-w-2xl flex-grow">
-      <router-view/>
+      <panel v-if="layout">
+        <router-view/>
+      </panel>
     </div>
 
-    <footer-main></footer-main>
+    <footer-main/>
 
   </div>
 </template>
@@ -15,10 +17,18 @@
     import '@/assets/styles/main.css';
     import Layout from './components/Layout';
     import FooterMain from './components/FooterMain';
+    import Panel from "./components/panel/Panel";
 
     export default {
         name: 'app',
-        components: { Layout, FooterMain }
+        components: {
+            Panel,
+            Layout, FooterMain },
+        computed: {
+            layout() {
+                return this.$route.meta.panel
+            }
+        }
     }
 </script>
 

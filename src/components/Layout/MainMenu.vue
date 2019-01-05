@@ -9,7 +9,7 @@
                 background-color="#22292f"
                 text-color="#fff"
                 active-text-color="#ffd04b">
-            <el-menu-item index="1">Home</el-menu-item>
+            <el-menu-item index="Home">Home</el-menu-item>
             <el-submenu index="2">
                 <template slot="title">Workspace</template>
                 <el-menu-item index="2-1">item one</el-menu-item>
@@ -46,6 +46,7 @@
         },
         methods: {
             handleSelect(key, keyPath) {
+                this.$router.push({ name: key })
                 console.log(key, keyPath);
             }
         }
