@@ -36,8 +36,9 @@
     import TopNav from "./TopNav";
     import MainLogo from "./Layout/MainLogo";
     import MainMenu from "./Layout/MainMenu";
+    import HotPosts from "./homepage/HotPosts";
     export default {
-        components: {MainMenu, MainLogo, TopNav},
+        components: {HotPosts, MainMenu, MainLogo, TopNav},
         data() {
             return {
                 authenticated: auth.check(),

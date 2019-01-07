@@ -61,11 +61,10 @@
                     "userId": 1,
                     "userName": "Admin"
                 },],
-                endpointPrefix: 'http://porady-prawnicze.test:8080/api'
             };
         },
         mounted () {
-            axios.get(this.endpointPrefix + '/post/category/popular', {
+            this.$http.get('/post/category/popular', {
                 headers: {'Content-Type': 'application/json'}
             })
                 .then(response => (this.posts = response.data.data))

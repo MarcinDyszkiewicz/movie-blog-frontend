@@ -81,7 +81,7 @@ import router from './router';
 import auth from './auth';
 
 const axiosDev = axios.create({
-   baseURL: ""
+   baseURL: "http://api-movie-blog.test/api/"
 });
 
 Vue.use(VueAxios, axiosDev);
