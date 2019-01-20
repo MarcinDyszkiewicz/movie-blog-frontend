@@ -3,53 +3,39 @@
 
        <div>
            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-               <el-form-item label="Title" prop="Title">
-                   <el-input v-model="ruleForm.Title" class="w-4/5 float-left"/>
+               <el-form-item label="Title" prop="title">
+                   <el-input v-model="ruleForm.title" class="w-4/5 float-left"/>
                </el-form-item>
-               <el-form-item label="Year" prop="Year">
-                   <el-date-picker type="year" placeholder="Pick a year" v-model="ruleForm.Year" class="float-left" style="width: 30%;"/>
+               <el-form-item label="Year" prop="year">
+                   <el-date-picker type="year" placeholder="Pick a year" format="yyyy" value-fromat="yyyy" v-model="ruleForm.year" class="float-left" style="width: 30%;"/>
                </el-form-item>
-               <el-form-item label="Released" prop="Released">
-                   <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.Released" class="float-left" style="width: 30%;"/>
+               <el-form-item label="Released" prop="released">
+                   <el-date-picker type="date" placeholder="Pick a date" format="dd MMM yyyy" value-fromat="dd MMM yyyy" v-model="ruleForm.released" class="float-left" style="width: 30%;"/>
                </el-form-item>
-               <el-form-item label="Activity zone" prop="region">
-                   <el-select v-model="ruleForm.region" placeholder="Activity zone">
-                       <el-option label="Zone one" value="shanghai"></el-option>
-                       <el-option label="Zone two" value="beijing"></el-option>
-                   </el-select>
+               <el-form-item label="Runtime" prop="runtime">
+                   <el-input v-model="ruleForm.runtime" placeholder="Runtime"  class="float-left" style="width: 30%;"/>
                </el-form-item>
-               <el-form-item label="Activity time" required>
-                   <el-col :span="11">
-                       <el-form-item prop="date1">
-                           <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-                       </el-form-item>
-                   </el-col>
-                   <el-col class="line" :span="2">-</el-col>
-                   <el-col :span="11">
-                       <el-form-item prop="date2">
-                           <el-time-picker type="fixed-time" placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-                       </el-form-item>
-                   </el-col>
+               <el-form-item label="Plot" prop="plot">
+                   <el-input type="textarea" v-model="ruleForm.plot"></el-input>
                </el-form-item>
-               <el-form-item label="Instant delivery" prop="delivery">
-                   <el-switch v-model="ruleForm.delivery"></el-switch>
+               <el-form-item label="Review" prop="review">
+                   <el-input type="textarea" v-model="ruleForm.review"></el-input>
                </el-form-item>
-               <el-form-item label="Activity type" prop="type">
-                   <el-checkbox-group v-model="ruleForm.type">
-                       <el-checkbox label="Online activities" name="type"></el-checkbox>
-                       <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-                       <el-checkbox label="Offline activities" name="type"></el-checkbox>
-                       <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
-                   </el-checkbox-group>
+               <el-form-item label="Poster" prop="poster">
+                   <el-input v-model="ruleForm.poster" placeholder="Poster url" class="w-4/5 float-left"/>
                </el-form-item>
-               <el-form-item label="Resources" prop="resource">
-                   <el-radio-group v-model="ruleForm.resource">
-                       <el-radio label="Sponsorship"></el-radio>
-                       <el-radio label="Venue"></el-radio>
-                   </el-radio-group>
+               Raitings:
+               <el-form-item label="imdb">
+                   <span v-text="ruleForm.ratings[0].Value" class="float-left text-left" style="width: 30%;"></span>
                </el-form-item>
-               <el-form-item label="Activity form" prop="desc">
-                   <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+               <el-form-item label="Rotten Tomatoes">
+                   <span v-text="ruleForm.ratings[1].Value" class="float-left text-left" style="width: 30%;"></span>
+               </el-form-item>
+               <el-form-item label="Metacritic">
+                   <span v-text="ruleForm.ratings[2].Value" class="float-left text-left" style="width: 30%;"></span>
+               </el-form-item>
+               <el-form-item label="Slug" prop="slug">
+                   <el-input v-model="ruleForm.slug" class="w-4/5 float-left"/>
                </el-form-item>
                <el-form-item>
                    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
@@ -72,37 +58,44 @@
         data() {
             return {
                 ruleForm: {
-                    Title: '',
-                    Year: '',
-                    Released: '',
-                    Runtime: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
+                    title: '',
+                    year: '',
+                    released: '',
+                    runtime: '',
+                    plot: '',
+                    review: '',
+                    poster: '',
+                    ratings: ['','',''],
+                    slug: '',
                 },
                 rules: {
-                    Title: [
+                    title: [
                         { required: true, message: 'Please input Title', trigger: 'blur' },
-                        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+                        { min: 3, max: 255, message: 'Length should be 3 to 255', trigger: 'blur' }
                     ],
-                    Year: [
-                        { type: 'date', required: true, message: 'Please pick a year', trigger: 'change' }
+                    year: [
+                        { required: true, message: 'Please pick a year', trigger: 'blur' }
                     ],
-                    Released: [
-                        { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
-                    ],
-                    Runtime: [
+                    // released: [
+                    //     { type: 'date', required: true, message: 'Please pick a date', trigger: 'blur' }
+                    // ],
+                    runtime: [
                         { type: 'integer', required: true, message: 'Please input Runtime', trigger: 'change' }
                     ],
-                    type: [
-                        { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
+                    plot: [
+                        { min: 10, required: false, message: 'Length should be at least 10 characters', trigger: 'change' }
                     ],
-                    resource: [
-                        { required: true, message: 'Please select activity resource', trigger: 'change' }
+                    review: [
+                        { required: false, message: 'Please select activity resource', trigger: 'change' }
                     ],
-                    desc: [
-                        { required: true, message: 'Please input activity form', trigger: 'blur' }
+                    poster: [
+                        { required: false, message: 'Please input activity form', trigger: 'change' }
+                    ],
+                    ratings: [
+                        { required: false, message: 'Please input activity form', trigger: 'change' }
+                    ],
+                    slug: [
+                        { required: true, message: 'Please input slug url', trigger: 'change' }
                     ]
                 }
             };
@@ -111,7 +104,14 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        this.$http.post('/movie',
+                            this.ruleForm,
+                            { headers: {'Content-Type': 'application/json'}
+                        })
+                            .then(response => (console.log(this.ruleForm)))
+                            .catch(({response}) => {
+                                alert(response.data.message);
+                            })
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -120,11 +120,33 @@
             },
             resetForm(formName) {
                 this.$refs[formName].resetFields();
-            }
+            },
+            slugify(text) {
+                return text.toString().toLowerCase()
+                    .replace(/\s+/g, '-')           // Replace spaces with -
+                    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                    .replace(/^-+/, '')             // Trim - from start of text
+                    .replace(/-+$/, '');            // Trim - from end of text
+            },
         },
         mounted() {
             console.log(this.movie);
-            this.ruleForm = this.movie;
+            if (this.movie) {
+                this.ruleForm.title = this.movie.Title;
+                this.ruleForm.year = this.movie.Year;
+                this.ruleForm.released = this.movie.Released;
+                this.ruleForm.runtime = parseInt(this.movie.Runtime);
+                this.ruleForm.plot = this.movie.Plot;
+                // this.ruleForm.review = this.movie.Review;
+                this.ruleForm.poster = this.movie.Poster;
+                this.ruleForm.ratings = this.movie.Ratings;
+                this.ruleForm.title = this.movie.Title;
+                this.ruleForm.title = this.movie.Title;
+
+                this.ruleForm.slug = this.slugify(this.movie.Title + " " + this.movie.Year);
+                this.ruleForm.Released = new Date(this.movie.Released);
+            }
         }
     }
 </script>
