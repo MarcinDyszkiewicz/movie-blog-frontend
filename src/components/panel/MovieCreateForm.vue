@@ -34,6 +34,26 @@
                <el-form-item label="Metacritic">
                    <span v-text="ruleForm.ratings[2].Value" class="float-left text-left" style="width: 30%;"></span>
                </el-form-item>
+               <el-form-item label="Actors" prop="actors">
+               <el-select
+                       v-model="ruleForm.actors"
+                       multiple
+                       filterable
+                       allow-create
+                       remote
+                       reserve-keyword
+                       placeholder="Please enter a keyword"
+                       :remote-method="remoteMethod"
+                       :loading="loading"
+                       class="w-4/5 float-left">
+                   <el-option
+                           v-for="item in options4"
+                           :key="item.value"
+                           :label="item.label"
+                           :value="item.value">
+                   </el-option>
+               </el-select>
+               </el-form-item>
                <el-form-item label="Slug" prop="slug">
                    <el-input v-model="ruleForm.slug" class="w-4/5 float-left"/>
                </el-form-item>
@@ -66,8 +86,17 @@
                     review: '',
                     poster: '',
                     ratings: ['','',''],
+                    genreIds: [],
+                    actors: [],
+                    director: [],
                     slug: '',
                 },
+
+
+                    options4: [],
+                    list: [],
+                    loading: false,
+
                 rules: {
                     title: [
                         { required: true, message: 'Please input Title', trigger: 'blur' },
@@ -92,6 +121,12 @@
                         { required: false, message: 'Please input activity form', trigger: 'change' }
                     ],
                     ratings: [
+                        { required: false, message: 'Please input activity form', trigger: 'change' }
+                    ],
+                    actors: [
+                        { type: 'array', required: false, message: 'Choose an Actor', trigger: 'change' }
+                    ],
+                    director: [
                         { required: false, message: 'Please input activity form', trigger: 'change' }
                     ],
                     slug: [
@@ -121,6 +156,31 @@
             resetForm(formName) {
                 this.$refs[formName].resetFields();
             },
+            getActorsFromDb() {
+                let actorsFromDb;
+                this.$http.get('/actor', {
+                    headers: {'Content-Type': 'application/json'}
+                })
+                    .then(response => (actorsFromDb = response.data))
+                    .catch(({response}) => {
+                        alert(response.data.message);
+                    });
+                return actorsFromDb
+            },
+            remoteMethod(query) {
+                if (query !== '') {
+                    this.loading = true;
+                    setTimeout(() => {
+                        this.loading = false;
+                        this.options4 = this.list.filter(item => {
+                            return item.label.toLowerCase()
+                                .indexOf(query.toLowerCase()) > -1;
+                        });
+                    }, 200);
+                } else {
+                    this.options4 = [];
+                }
+            },
             slugify(text) {
                 return text.toString().toLowerCase()
                     .replace(/\s+/g, '-')           // Replace spaces with -
@@ -145,7 +205,13 @@
                 this.ruleForm.title = this.movie.Title;
 
                 this.ruleForm.slug = this.slugify(this.movie.Title + " " + this.movie.Year);
-                this.ruleForm.Released = new Date(this.movie.Released);
+                // this.ruleForm.released = new Date(this.movie.Released);
+
+                let actors = this.movie.Actors.split(", ");
+                this.ruleForm.actors = actors;
+                this.list = actors.map(item => {
+                    return { value: item, label: item };
+                });
             }
         }
     }
