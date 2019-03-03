@@ -48,9 +48,9 @@
                        class="w-4/5 float-left">
                    <el-option
                            v-for="item in actorsArray"
-                           :key="item.value"
-                           :label="item.label"
-                           :value="item.value">
+                           :key="item.id"
+                           :label="item.full_name"
+                           :value="item.full_name">
                    </el-option>
                </el-select>
                </el-form-item>
@@ -66,11 +66,21 @@
                            :remote-method="remoteMethod2"
                            :loading="loading"
                            class="w-4/5 float-left">
+                   </el-select>
                        <el-option
                                v-for="item in directorsArray"
                                :key="item.value"
                                :label="item.label"
                                :value="item.value">
+                       </el-option>
+               </el-form-item>
+               <el-form-item label="Genres" prop="genres">
+                   <el-select v-model="ruleForm.genreIds" multiple placeholder="Select many" class="w-4/5 float-left">
+                       <el-option
+                               v-for="item in genresArray"
+                               :key="item.id"
+                               :label="item.name"
+                               :value="item.id">
                        </el-option>
                    </el-select>
                </el-form-item>
@@ -114,7 +124,9 @@
 
 
                     actorsArray: [],
+                    actorsArray2: [],
                     directorsArray: [],
+                    genresArray: [],
                     list: [],
                     loading: false,
 
@@ -178,28 +190,35 @@
                 this.$refs[formName].resetFields();
             },
             getActorsFromDb() {
-                let actorsFromDb;
-                this.$http.get('/actor', {
+                this.$http.get('/actors', {
                     headers: {'Content-Type': 'application/json'}
                 })
-                    .then(response => (actorsFromDb = response.data))
+                    .then(response => (this.actorsArray = response.data.data))
                     .catch(({response}) => {
                         alert(response.data.message);
                     });
-                return actorsFromDb
+            },
+            getGenresFromDb() {
+                this.$http.get('/genres', {
+                    headers: {'Content-Type': 'application/json'}
+                })
+                    .then(response => (this.genresArray = response.data.data))
+                    .catch(({response}) => {
+                        alert(response.data.message);
+                    });
             },
             remoteMethod(query) {
                 if (query !== '') {
                     this.loading = true;
                     setTimeout(() => {
                         this.loading = false;
-                        this.actorsArray = this.list.filter(item => {
-                            return item.label.toLowerCase()
+                        this.actorsArray2 = this.actorsArray.filter(item => {
+                            return item.full_name.toLowerCase()
                                 .indexOf(query.toLowerCase()) > -1;
                         });
                     }, 200);
                 } else {
-                    this.actorsArray = [];
+                    this.actorsArray2 = [];
                 }
             },
             remoteMethod2(query) {
@@ -253,6 +272,11 @@
                     return { value: item, label: item };
                 });
             }
+            this.getGenresFromDb();
+            this.getActorsFromDb();
+            setTimeout(() => {
+                console.log(this.actorsArray)
+            }, 400)
         }
     }
 </script>

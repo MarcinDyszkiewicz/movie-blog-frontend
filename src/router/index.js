@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import Login from '@/components/Login';
 import SinglePost from '@/components/post/SinglePost';
+import SingleMovie from '@/components/movies/SingleMovie';
 import Panel from '@/components/panel/Panel';
 import MovieCreate from '@/components/panel/MovieCreate';
 import MovieCreateForm from '@/components/panel/MovieCreateForm';
@@ -27,6 +28,14 @@ export default new Router({
       name: 'SinglePost',
       component: SinglePost,
     },
+      //movies
+    {
+      path: '/movie/:id',
+      name: 'SingleMovie',
+      // props: true,
+      component: SingleMovie,
+    },
+
       //@@todo mocked data
 
       //panel
