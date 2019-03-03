@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="mt-12">
+        <div class="mt-12" style="margin-top: 15vh">
             <p class="italic">*can't find the movie ?</p>
             <button class="bg-green-dark hover:bg-green-darker text-white py-2 px-4 rounded" @click="redirectWithData()">
                 Create Movie From Scratch

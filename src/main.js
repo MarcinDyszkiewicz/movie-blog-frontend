@@ -81,7 +81,10 @@ import router from './router';
 import auth from './auth';
 
 const axiosDev = axios.create({
-   baseURL: "http://api-movie-blog.test/api/"
+   baseURL: "http://0.0.0.0:3000/api/v1",
+    withCredentials: true,
+    credentials: true,
+    headers:{'Access-Control-Allow-Origin': '*'}
 });
 
 Vue.use(VueAxios, axiosDev);

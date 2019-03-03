@@ -42,7 +42,8 @@
             };
         },
         mounted () {
-            this.$http.get('/post/list/homepage', {
+            // this.$http.get('/post/list/homepage', {
+            this.$http.get('/movies', {
                 headers: {'Content-Type': 'application/json'}
             })
                 .then(response => (this.posts = response.data.data))

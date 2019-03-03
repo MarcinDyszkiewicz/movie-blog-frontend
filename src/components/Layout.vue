@@ -10,6 +10,7 @@
             <!--Menu-->
             <main-menu/>
 
+            <!--<homepage/>-->
         </div>
 
 
@@ -37,8 +38,11 @@
     import MainLogo from "./Layout/MainLogo";
     import MainMenu from "./Layout/MainMenu";
     import HotPosts from "./homepage/HotPosts";
+    import Homepage from "./Home";
     export default {
-        components: {HotPosts, MainMenu, MainLogo, TopNav},
+        components: {
+            Homepage,
+            HotPosts, MainMenu, MainLogo, TopNav},
         data() {
             return {
                 authenticated: auth.check(),

@@ -47,12 +47,32 @@
                        :loading="loading"
                        class="w-4/5 float-left">
                    <el-option
-                           v-for="item in options4"
+                           v-for="item in actorsArray"
                            :key="item.value"
                            :label="item.label"
                            :value="item.value">
                    </el-option>
                </el-select>
+               </el-form-item>
+               <el-form-item label="Director" prop="director">
+                   <el-select
+                           v-model="ruleForm.director"
+                           multiple
+                           filterable
+                           allow-create
+                           remote
+                           reserve-keyword
+                           placeholder="Please enter a keyword"
+                           :remote-method="remoteMethod2"
+                           :loading="loading"
+                           class="w-4/5 float-left">
+                       <el-option
+                               v-for="item in directorsArray"
+                               :key="item.value"
+                               :label="item.label"
+                               :value="item.value">
+                       </el-option>
+                   </el-select>
                </el-form-item>
                <el-form-item label="Slug" prop="slug">
                    <el-input v-model="ruleForm.slug" class="w-4/5 float-left"/>
@@ -93,7 +113,8 @@
                 },
 
 
-                    options4: [],
+                    actorsArray: [],
+                    directorsArray: [],
                     list: [],
                     loading: false,
 
@@ -139,11 +160,11 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$http.post('/movie',
+                        this.$http.post('/movies',
                             this.ruleForm,
-                            { headers: {'Content-Type': 'application/json'}
+                            { headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' }
                         })
-                            .then(response => (console.log(this.ruleForm)))
+                            .then(response => (response.data))
                             .catch(({response}) => {
                                 alert(response.data.message);
                             })
@@ -172,13 +193,27 @@
                     this.loading = true;
                     setTimeout(() => {
                         this.loading = false;
-                        this.options4 = this.list.filter(item => {
+                        this.actorsArray = this.list.filter(item => {
                             return item.label.toLowerCase()
                                 .indexOf(query.toLowerCase()) > -1;
                         });
                     }, 200);
                 } else {
-                    this.options4 = [];
+                    this.actorsArray = [];
+                }
+            },
+            remoteMethod2(query) {
+                if (query !== '') {
+                    this.loading = true;
+                    setTimeout(() => {
+                        this.loading = false;
+                        this.directorsArray = this.list.filter(item => {
+                            return item.label.toLowerCase()
+                                .indexOf(query.toLowerCase()) > -1;
+                        });
+                    }, 200);
+                } else {
+                    this.actorsArray = [];
                 }
             },
             slugify(text) {
@@ -210,6 +245,11 @@
                 let actors = this.movie.Actors.split(", ");
                 this.ruleForm.actors = actors;
                 this.list = actors.map(item => {
+                    return { value: item, label: item };
+                });
+                let directors = this.movie.Director.split(", ");
+                this.ruleForm.director = directors;
+                this.list = directors.map(item => {
                     return { value: item, label: item };
                 });
             }
