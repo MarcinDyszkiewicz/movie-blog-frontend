@@ -25,12 +25,39 @@
                             <p>genres: </p>
                         </div>
                         <div class="">
-                            <p>{{movie.director}}</p>
-                            <p>{{movie.actors}}</p>
-                            <p>{{movie.genres}}</p>
+                            <p><span v-for="director in movie.directors">{{director.full_name}}, </span></p>
+                            <p><span v-for="actor in movie.actors">{{actor.full_name}}, </span></p>
+                            <p><span v-for="genre in movie.genres">{{genre.name}}, </span></p>
                         </div>
                     </div>
                 </div>
+                <div class="mt-4">
+                    <div class="flex">
+                        <div class="w-1/3">
+                            <p v-if="movie.rotten_tomatoes_rating">Rotten tomatoes rating: </p>
+                            <p v-if="movie.metacritic_rating">Metacritic rating: </p>
+                            <p v-if="movie.imdb_raiting">Imdb rating: </p>
+                            <p>Movie Blog Rating:</p>
+                        </div>
+                        <div class="">
+                            <p v-if="movie.rotten_tomatoes_rating"><span>{{movie.rotten_tomatoes_rating}}</span></p>
+                            <p v-if="movie.metacritic_rating"><span>{{movie.metacritic_rating}}</span></p>
+                            <p v-if="movie.imdb_raiting"><span>{{movie.imdb_raiting}}</span></p>
+                            <p><span>{{rating}}</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<el-rate-->
+                        <!--v-model="rate"-->
+                        <!--:onratechange="rateMovie()"-->
+                        <!--value=""-->
+                        <!--:max="10"-->
+                        <!--:disabled="disableRate"-->
+                        <!--show-score-->
+                        <!--show-text-->
+                        <!--text-color="#ff9900">-->
+                <!--</el-rate>-->
             </div>
 
             <div class="w-1/4">
@@ -38,12 +65,15 @@
             </div>
         </div>
 
-
+        <movie-comments :movieId = "$route.params.id"/>
     </div>
 </template>
 
 <script>
+    import MovieComments from "./MovieComments";
+
     export default {
+        components: {MovieComments},
         name: "single-movie",
         data() {
             return {
@@ -54,14 +84,21 @@
                     runtime: '',
                     plot: '',
                     review: '',
+                    rotten_tomatoes_rating: '',
+                    metacritic_rating: '',
+                    imdb_raiting: '',
+                    rating: '',
                     poster: '',
-                    ratings: ['','',''],
-                    genreIds: [],
+                    ratings: ['', '', ''],
                     actors: [],
                     directors: [],
+                    genres: [],
                     slug: '',
-                    genres: []
                 },
+                rating: null,
+                votesCount: null,
+                rate: null,
+                disableRate: false
             }
         },
         methods: {
@@ -74,9 +111,36 @@
                         alert(response.data.message);
                     });
             },
+            getRating() {
+                this.$http.get("/movies/" + this.$route.params.id + "/rating", {
+                    headers: {'Content-Type': 'application/json'}
+                })
+                    .then(response => (this.rating = response.data.data.rating))
+                    .catch(({response}) => {
+                        alert(response.data.message);
+                    });
+            },
+            rateMovie() {
+                this.$http.post("/movies/" + this.$route.params.id + "/rate",
+                    {"rate": this.rate},
+                    {
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                    .then(response => {
+                        this.disableRate = true;
+                        this.getRating();
+                    })
+                    .catch(({response}) => {
+                        alert(response.data.message);
+                    });
+            },
+            check(){
+                console.log('taa')
+            }
         },
         mounted() {
             this.getMovie();
+            this.getRating();
         }
     }
 </script>

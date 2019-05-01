@@ -75,12 +75,12 @@
                        </el-option>
                </el-form-item>
                <el-form-item label="Genres" prop="genres">
-                   <el-select v-model="ruleForm.genreIds" multiple placeholder="Select many" class="w-4/5 float-left">
+                   <el-select v-model="ruleForm.genres" multiple placeholder="Select many" class="w-4/5 float-left">
                        <el-option
                                v-for="item in genresArray"
                                :key="item.id"
                                :label="item.name"
-                               :value="item.id">
+                               :value="item.name">
                        </el-option>
                    </el-select>
                </el-form-item>
@@ -116,7 +116,7 @@
                     review: '',
                     poster: '',
                     ratings: ['','',''],
-                    genreIds: [],
+                    genres: [],
                     actors: [],
                     director: [],
                     slug: '',
@@ -255,8 +255,6 @@
                 // this.ruleForm.review = this.movie.Review;
                 this.ruleForm.poster = this.movie.Poster;
                 this.ruleForm.ratings = this.movie.Ratings;
-                this.ruleForm.title = this.movie.Title;
-                this.ruleForm.title = this.movie.Title;
 
                 this.ruleForm.slug = this.slugify(this.movie.Title + " " + this.movie.Year);
                 // this.ruleForm.released = new Date(this.movie.Released);
@@ -269,6 +267,11 @@
                 let directors = this.movie.Director.split(", ");
                 this.ruleForm.director = directors;
                 this.list = directors.map(item => {
+                    return { value: item, label: item };
+                });
+                let genres = this.movie.Genre.split(", ");
+                this.ruleForm.genres = genres;
+                this.list = genres.map(item => {
                     return { value: item, label: item };
                 });
             }

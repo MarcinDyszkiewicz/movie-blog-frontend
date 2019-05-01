@@ -4,7 +4,7 @@
 
     <div class="container w-full mx-auto max-w-2xl flex-grow">
       <panel v-if="layout"/>
-      <!--<router-view/>-->
+      <router-view/>
     </div>
 <!--podzielić na dwa layouty i w srodku nich wbic router view-->
     <footer-main/>
