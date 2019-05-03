@@ -3,6 +3,8 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import { getToken } from "./utils/jwt"
+
   import {
       Pagination,
       Dialog,
@@ -86,6 +88,23 @@ const axiosDev = axios.create({
     credentials: true,
     headers:{'Access-Control-Allow-Origin': '*'}
 });
+
+axiosDev.interceptors.response.use(res => res, error => {
+    if (error.response.status === 401) {
+    } else {
+        return Promise.reject(error);
+    }
+});
+
+axiosDev.interceptors.request.use(config =>{
+   const token = getToken();
+
+   if (token) {
+       config.headers.Authorization = "Bearer " + token;
+   }
+
+   return config;
+}, error => Promise.reject(error));
 
 Vue.use(VueAxios, axiosDev);
 Vue.use(router);
