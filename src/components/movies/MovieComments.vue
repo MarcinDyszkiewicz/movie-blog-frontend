@@ -18,35 +18,31 @@
                             <div class="text-black text-l mb-2">Can coffee make you a better developer? {{comment.body}}</div>
                         </div>
                         <like-comment :comment="comment"/>
-                        <!--<div class="flex items-center">-->
-                            <!--<p class="text-grey-darker text-base">-->
-                                <!--{{comment.likes}}-->
-                                <!--<a class="cursor-pointer" @click="likeComment(comment.id, 10)">-->
-                                    <!--<i class="fas fa-chevron-up text-green" :class="bgColorLikeIcon()"></i>-->
-                                <!--</a>-->
-                                <!--<a class="cursor-pointer" @click="likeComment(comment.id, 20)"><i class="fas fa-chevron-down text-red"></i></a>-->
-                            <!--</p>-->
-                        <!--</div>-->
                     </div>
-
-
                 </div>
             </div>
-
+            <div>
+                REply button
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {LikeTypes} from "../../config"
     import LikeComment from "../comments/LikeComment";
     export default {
         components: {LikeComment},
         name: "movie-comments",
-        props: ["movieId"],
+        props: ["movieId", "newComment"],
         data() {
             return {
                 comments: [],
+            }
+        },
+        watch: {
+            newComment: function (comment) {
+                console.log(comment);
+                this.comments.push(comment)
             }
         },
         methods: {
@@ -59,26 +55,6 @@
                         alert(response.data.message);
                     });
             },
-            // likeComment: function (comment_id, like_type) {
-            //     this.$http.post("/comments/" + comment_id + "/likes",
-            //         {"like_type": like_type},
-            //         {
-            //             headers: {'Content-Type': 'application/json'}
-            //         })
-            //         .then(response => {
-            //             if (like_type === LikeTypes.LIKE) {
-            //                 console.log('like')
-            //             } else if(like_type === LikeTypes.DISLIKE) {
-            //                 console.log('dislike')
-            //             }
-            //         })
-            //         .catch(({response}) => {
-            //             alert(response.data.message);
-            //         });
-            // },
-            // bgColorLikeIcon() {
-            //
-            // }
         },
         mounted() {
             this.getComments();

@@ -61,15 +61,6 @@
                                 this.likes--
                             }
                         }
-                        // if (this.userLikeType === null && responseLikeType === LikeTypes.LIKE) {
-                        //     this.likes++
-                        // } else if (this.userLikeType === null && responseLikeType === LikeTypes.DISLIKE) {
-                        //     this.likes--
-                        // } else if (this.userLikeType === LikeTypes.LIKE && responseLikeType === null) {
-                        //     this.likes--
-                        // } else if (this.userLikeType === LikeTypes.DISLIKE && responseLikeType === null) {
-                        //     this.likes++
-                        // }
                         this.userLikeType = responseLikeType;
 
                         console.log(this.userLikeType)
