@@ -15,7 +15,6 @@
                     <el-button type="primary" @click="createComment()">Add Comment</el-button>
                 </el-form-item>
             </el-form>
-
         </div>
     </div>
 </template>
