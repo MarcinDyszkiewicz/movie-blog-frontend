@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import Login from '@/components/auth/Login';
 import SinglePost from '@/components/post/SinglePost';
+import IndexMovies from '@/components/movies/IndexMovies';
 import SingleMovie from '@/components/movies/SingleMovie';
 import Panel from '@/components/panel/Panel';
 import MovieCreate from '@/components/panel/MovieCreate';
@@ -29,6 +30,11 @@ export default new Router({
       component: SinglePost,
     },
       //movies
+    {
+        path: '/movies',
+        name: 'Movies',
+        component: IndexMovies,
+    },
     {
       path: '/movie/:id',
       name: 'SingleMovie',
