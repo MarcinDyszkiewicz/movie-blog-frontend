@@ -155,6 +155,7 @@
         mounted() {
             this.getMovie();
             this.getRating();
+            // test
         }
     }
 </script>
