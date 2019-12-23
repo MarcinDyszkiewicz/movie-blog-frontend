@@ -11,6 +11,7 @@
                 active-text-color="#ffd04b">
             <el-menu-item index="Home">Home</el-menu-item>
             <el-menu-item index="Movies">Movies</el-menu-item>
+            <el-menu-item index="Genres">Genres</el-menu-item>
             <el-submenu index="2">
                 <template slot="title">Workspace</template>
                 <el-menu-item index="2-1">item one</el-menu-item>

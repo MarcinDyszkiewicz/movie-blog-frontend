@@ -8,6 +8,7 @@ import SingleMovie from '@/components/movies/SingleMovie';
 import Panel from '@/components/panel/Panel';
 import MovieCreate from '@/components/panel/MovieCreate';
 import MovieCreateForm from '@/components/panel/MovieCreateForm';
+import GenreIndex from "../components/genres/GenreIndex";
 
 Vue.use(Router);
 
@@ -40,6 +41,13 @@ export default new Router({
       name: 'SingleMovie',
       // props: true,
       component: SingleMovie,
+    },
+
+    //genres
+    {
+      path: '/genres',
+      name: 'Genres',
+      component: GenreIndex,
     },
 
       //@@todo mocked data
