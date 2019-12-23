@@ -85,11 +85,10 @@
                 this.foundMovie = movie;
             },
             chooseMovie() {
-                axios.get("http://www.omdbapi.com/?apikey=c9d3739b", {
-                    params: { type: "movie", i: this.foundMovie.imdbID },
-                    headers: { 'Content-Type': 'application/json' }
+                this.$http.get("/movies/omdb", {
+                    params: { omdb_id: this.foundMovie.imdbID },
                 })
-                    .then(response => (this.redirectWithData(response.data)))
+                    .then(response => (this.redirectWithData(response.data.data)))
                     .catch(({response}) => {
                         alert(response.data.message);
                     });

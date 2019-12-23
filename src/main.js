@@ -81,30 +81,47 @@ import locale from 'element-ui/lib/locale'
 import App from './App';
 import router from './router';
 import auth from './auth';
+const BaseUrlLaravel = "http://127.0.0.1:8091/api";
+const BaseUrlRails = "http://0.0.0.0:3000/api/v1";
 
 const axiosDev = axios.create({
-   baseURL: "http://0.0.0.0:3000/api/v1",
+    baseURL: BaseUrlLaravel,
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
     withCredentials: true,
-    credentials: true,
-    headers:{'Access-Control-Allow-Origin': '*'}
+    credentials: true
 });
 
-axiosDev.interceptors.response.use(res => res, error => {
-    if (error.response.status === 401) {
-    } else {
-        return Promise.reject(error);
-    }
-});
+// before a request is made start the nprogress
+// axiosDev.interceptors.request.use(config => {
+//     NProgress.start()
+//     return config
+// })
 
-axiosDev.interceptors.request.use(config =>{
-   const token = getToken();
+// before a response is returned stop nprogress
+// axiosDev.interceptors.response.use(response => {
+//     NProgress.done()
+//     return response
+// })
 
-   if (token) {
-       config.headers.Authorization = "Bearer " + token;
-   }
 
-   return config;
-}, error => Promise.reject(error));
+// axiosDev.interceptors.response.use(
+//   function(response) { return response;},
+//   function(error) {
+//     // handle error
+//     if (error.response) {
+//       alert(error.response.data.message);
+//     }
+//   });
+//
+// axiosDev.interceptors.request.use(config =>{
+//    const token = getToken();
+//
+//    if (token) {
+//        config.headers.Authorization = "Bearer " + token;
+//    }
+//
+//    return config;
+// }, error => Promise.reject(error));
 
 Vue.use(VueAxios, axiosDev);
 Vue.use(router);

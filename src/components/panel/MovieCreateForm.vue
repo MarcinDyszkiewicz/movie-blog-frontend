@@ -19,10 +19,10 @@
                     <el-input v-model="ruleForm.runtime" placeholder="Runtime" class="float-left" style="width: 30%;"/>
                 </el-form-item>
                 <el-form-item label="Plot" prop="plot">
-                    <el-input type="textarea" v-model="ruleForm.plot"></el-input>
+                    <el-input type="textarea" v-model="ruleForm.plot"/>
                 </el-form-item>
                 <el-form-item label="Review" prop="review">
-                    <el-input type="textarea" v-model="ruleForm.review"></el-input>
+                    <el-input type="textarea" v-model="ruleForm.review"/>
                 </el-form-item>
                 <el-form-item label="Poster" prop="poster">
                     <el-input v-model="ruleForm.poster" placeholder="Poster url" class="w-4/5 float-left"/>
@@ -146,7 +146,7 @@
                     //     { type: 'date', required: true, message: 'Please pick a date', trigger: 'blur' }
                     // ],
                     runtime: [
-                        {type: 'integer', required: true, message: 'Please input Runtime', trigger: 'change'}
+                        // {type: 'integer', required: true, message: 'Please input Runtime', trigger: 'change'}
                     ],
                     plot: [
                         {
@@ -186,14 +186,16 @@
                             {
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    'Accept': 'application/json',
-                                    'Access-Control-Allow-Origin': '*'
+                                    'Accept': 'application/json'
                                 }
                             })
-                            .then(response => (response.data))
-                            .catch(({response}) => {
-                                alert(response.data.message);
-                            })
+                          .then((response) => {
+                            console.log(response)
+                          })
+                            // .catch(error => {
+                            //   console.log(error)
+                            //     // alert(response.data.message);
+                            // })
                     } else {
                         console.log('error submit!!');
                         return false;
@@ -209,7 +211,7 @@
                 })
                     .then(response => (this.actorsArray = response.data.data))
                     .catch(({response}) => {
-                        alert(response.data.message);
+                        // alert(response.data.message);
                     });
             },
             getGenresFromDb() {
@@ -218,7 +220,7 @@
                 })
                     .then(response => (this.genresArray = response.data.data))
                     .catch(({response}) => {
-                        alert(response.data.message);
+                        // alert(response.data.message);
                     });
             },
             remoteMethod(query) {
